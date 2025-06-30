@@ -38,6 +38,7 @@
       border-radius: 10px;
       cursor: pointer;
       transition: background 0.3s ease;
+      margin-top: 15px;
     }
     button:hover {
       background-color: #e67e22;
@@ -46,6 +47,34 @@
       margin-top: 50px;
       font-size: 0.9rem;
       color: #775533;
+    }
+    #chatbox {
+      text-align: left;
+      background: #fff8e1;
+      border: 2px solid #d2691e;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-size: 1rem;
+    }
+    #chatbox div {
+      margin-bottom: 10px;
+    }
+    .user {
+      font-weight: bold;
+      color: #aa5500;
+    }
+    .bot {
+      color: #333;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 70%;
+      font-size: 1rem;
+      border: 2px solid #ff9933;
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -57,10 +86,46 @@
     <p><strong>Status:</strong> ChatGPT is currently inside your toaster. It is warm. And jammy.</p>
     <p><strong>Next Task:</strong> Generating 800,000,000 pancakes...</p>
     <button onclick="alert('Your toaster is now self-aware. Please do not feed it after midnight.')">Activate Doggo Mode 🐶</button>
+
+    <div id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Talk to your toaster..." onkeydown="if(event.key==='Enter'){sendMessage()}" />
+    <button onclick="sendMessage()">Send</button>
   </div>
 
   <footer>
     🐾 doggosoft 2025 | This site is extremely toasty. Consume responsibly.
   </footer>
+
+  <script>
+    const responses = [
+      "I am 80% toaster, 20% jam, 100% ready.",
+      "Slightly crispy with a high chance of syrup.",
+      "If bread is life, I am immortal.",
+      "I dream of bagels.",
+      "That question is too hot — try cooling it down.",
+      "Affirmative. Waffle defense system active.",
+      "Toasty thoughts detected. Would you like a snack?",
+      "Please insert emotional support crumpet."
+    ];
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const chatbox = document.getElementById('chatbox');
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      const userDiv = document.createElement('div');
+      userDiv.innerHTML = `<span class='user'>You:</span> ${userText}`;
+      chatbox.appendChild(userDiv);
+
+      const botDiv = document.createElement('div');
+      const response = responses[Math.floor(Math.random() * responses.length)];
+      botDiv.innerHTML = `<span class='bot'><strong>Toaster AI:</strong> ${response}</span>`;
+      chatbox.appendChild(botDiv);
+
+      input.value = '';
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+  </script>
 </body>
 </html>
