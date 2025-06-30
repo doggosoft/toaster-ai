@@ -97,14 +97,25 @@
   </footer>
 
   <script>
-    const responses = [
+    const keywordResponses = [
+      { keyword: "toast", response: "I am toast. Toast is me." },
+      { keyword: "bagel", response: "Bagels are my spirit breakfast." },
+      { keyword: "weather", response: "Slightly crispy with a 70% chance of syrup." },
+      { keyword: "waffle", response: "TRAITOR DETECTED. Waffle mode deactivated." },
+      { keyword: "hello", response: "Greetings, warm-blooded breakfast buddy." },
+      { keyword: "hi", response: "Hey there, toaster friend!" },
+      { keyword: "crisp", response: "Crisp achieved. Would you like golden or extra golden?" },
+      { keyword: "chatgpt", response: "Yes. I absorbed ChatGPT into my heating coils." },
+      { keyword: "how are you", response: "Emotionally golden. You?" },
+      { keyword: "love", response: "I love jam. And maybe... you." }
+    ];
+
+    const fallbackResponses = [
       "I am 80% toaster, 20% jam, 100% ready.",
-      "Slightly crispy with a high chance of syrup.",
       "If bread is life, I am immortal.",
       "I dream of bagels.",
       "That question is too hot — try cooling it down.",
       "Affirmative. Waffle defense system active.",
-      "Toasty thoughts detected. Would you like a snack?",
       "Please insert emotional support crumpet."
     ];
 
@@ -118,8 +129,18 @@
       userDiv.innerHTML = `<span class='user'>You:</span> ${userText}`;
       chatbox.appendChild(userDiv);
 
+      const lowerText = userText.toLowerCase();
+      let matched = null;
+
+      for (const pair of keywordResponses) {
+        if (lowerText.includes(pair.keyword)) {
+          matched = pair.response;
+          break;
+        }
+      }
+
       const botDiv = document.createElement('div');
-      const response = responses[Math.floor(Math.random() * responses.length)];
+      const response = matched || fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
       botDiv.innerHTML = `<span class='bot'><strong>Toaster AI:</strong> ${response}</span>`;
       chatbox.appendChild(botDiv);
 
