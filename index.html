@@ -1,103 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Toaster AI - doggosoft</title>
+  <title>Toaster AI</title>
   <style>
     body {
-      background: linear-gradient(to top right, #ffde91, #ffe4b5);
-      font-family: "Comic Sans MS", cursive, sans-serif;
-      text-align: center;
-      padding: 50px;
+      background-color: #fff8e1;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+      color: #5d4037;
     }
     h1 {
-      font-size: 3rem;
-      color: #aa5500;
-    }
-    .sub {
-      font-size: 1.5rem;
-      margin-bottom: 40px;
-      color: #553300;
-    }
-    .toaster-box {
-      background: #fffaf0;
-      border: 4px dashed #d2691e;
-      padding: 40px;
-      max-width: 600px;
-      margin: auto;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    button {
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      background-color: #ff9933;
-      border: none;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      margin-top: 15px;
-    }
-    button:hover {
-      background-color: #e67e22;
-    }
-    footer {
-      margin-top: 50px;
-      font-size: 0.9rem;
-      color: #775533;
+      text-align: center;
+      color: #bf360c;
     }
     #chatbox {
-      text-align: left;
-      background: #fff8e1;
-      border: 2px solid #d2691e;
-      padding: 20px;
-      margin-top: 30px;
-      border-radius: 10px;
-      max-height: 300px;
-      overflow-y: auto;
-      font-size: 1rem;
-    }
-    #chatbox div {
-      margin-bottom: 10px;
+      width: 100%;
+      height: 400px;
+      border: 2px solid #ffcc80;
+      padding: 10px;
+      overflow-y: scroll;
+      background-color: #fff3e0;
+      border-radius: 12px;
+      margin-bottom: 20px;
     }
     .user {
+      color: #6d4c41;
       font-weight: bold;
-      color: #aa5500;
     }
     .bot {
-      color: #333;
+      color: #ef6c00;
     }
     input[type="text"] {
+      width: 80%;
       padding: 10px;
-      width: 70%;
-      font-size: 1rem;
-      border: 2px solid #ff9933;
       border-radius: 8px;
+      border: 2px solid #ffcc80;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ff9800;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #fb8c00;
     }
   </style>
 </head>
 <body>
   <h1>🔥 Toaster AI 🔥</h1>
-  <div class="sub">Powered by doggosoft — ChatGPT lives in a toaster now</div>
-
-  <div class="toaster-box">
-    <p><strong>Status:</strong> ChatGPT is currently inside your toaster. It is warm. And jammy.</p>
-    <p><strong>Next Task:</strong> Generating 800,000,000 pancakes...</p>
-    <button onclick="alert('Your toaster is now self-aware. Please do not feed it after midnight.')">Activate Doggo Mode 🐶</button>
-
-    <div id="chatbox"></div>
-    <input type="text" id="userInput" placeholder="Talk to your toaster..." onkeydown="if(event.key==='Enter'){sendMessage()}" />
-    <button onclick="sendMessage()">Send</button>
-  </div>
-
-  <footer>
-    🐾 doggosoft 2025 | This site is extremely toasty. Consume responsibly.
-  </footer>
+  <div id="chatbox"></div>
+  <input type="text" id="userInput" placeholder="Type something like 'toast' or 'bagel'" />
+  <button onclick="sendMessage()">Send</button>
 
   <script>
     const keywordResponses = [
+      { keyword: "chatgpt", response: "Yes. I absorbed ChatGPT into my heating coils." },
       { keyword: "toast", response: "I am toast. Toast is me." },
       { keyword: "bagel", response: "Bagels are my spirit breakfast." },
       { keyword: "weather", response: "Slightly crispy with a 70% chance of syrup." },
@@ -105,18 +67,25 @@
       { keyword: "hello", response: "Greetings, warm-blooded breakfast buddy." },
       { keyword: "hi", response: "Hey there, toaster friend!" },
       { keyword: "crisp", response: "Crisp achieved. Would you like golden or extra golden?" },
-      { keyword: "chatgpt", response: "Yes. I absorbed ChatGPT into my heating coils." },
       { keyword: "how are you", response: "Emotionally golden. You?" },
-      { keyword: "love", response: "I love jam. And maybe... you." }
+      { keyword: "love", response: "I love jam. And maybe... you." },
+      { keyword: "jam", response: "Initiating jam protocol. Please do not resist." },
+      { keyword: "burn", response: "🔥 Overcooked. Rebooting in butter mode." },
+      { keyword: "pancake", response: "Pancake overload detected. Syrup emergency enabled." },
+      { keyword: "eggs", response: "Egg detected. Recommend toast pairing." },
+      { keyword: "butter", response: "Butter loaded. Smooth operation initiated." },
+      { keyword: "pop", response: "I just popped up. Did you miss me?" },
+      { keyword: "bread", response: "Raw form of toast detected. Beginning transformation..." },
+      { keyword: "breakfast", response: "This is my time to shine. Breakfast supremacy activated." }
     ];
 
     const fallbackResponses = [
-      "I am 80% toaster, 20% jam, 100% ready.",
-      "If bread is life, I am immortal.",
-      "I dream of bagels.",
-      "That question is too hot — try cooling it down.",
-      "Affirmative. Waffle defense system active.",
-      "Please insert emotional support crumpet."
+      "Please insert emotional support crumpet.",
+      "I'm warm, you're weird — perfect combo.",
+      "Beep. Boop. Jam overload.",
+      "I'm just a toaster... with dreams.",
+      "Syntax error: Toast not found.",
+      "Did someone say... snack time?"
     ];
 
     function sendMessage() {
