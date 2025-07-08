@@ -1,113 +1,173 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Toaster AI</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 40px;
-        background: white;
-      }
-      #chatbox {
-        width: 100%;
-        height: 400px;
-        border: 1px solid #ccc;
-        padding: 10px;
-        overflow-y: scroll;
-        background: #f9f9f9;
-        margin-bottom: 10px;
-      }
-      .user {
-        font-weight: bold;
-        color: #333;
-      }
-      .bot {
-        color: #d35400;
-        margin-bottom: 10px;
-      }
-      input[type="text"] {
-        width: 75%;
-        padding: 10px;
-        font-size: 16px;
-      }
-      button {
-        padding: 10px 20px;
-        font-size: 16px;
-        background: #ffa500;
-        color: white;
-        border: none;
-        cursor: pointer;
-      }
-      button:hover {
-        background: #e69500;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Toaster AI</h1>
-    <div id="chatbox"></div>
-    <input type="text" id="userInput" placeholder="Type something..." />
-    <button onclick="sendMessage()">Send</button>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🔥 Toaster AI 🔥</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom right, #ffe0a3, #ffd68a);
+      text-align: center;
+      padding: 40px;
+    }
 
-    <script>
-      const keywordResponses = [
-        { keyword: "chatgpt", response: "Yes. I absorbed ChatGPT into my heating coils." },
-        { keyword: "toast", response: "I am toast. Toast is me." },
-        { keyword: "bagel", response: "Bagels are my spirit breakfast." },
-        { keyword: "weather", response: "Slightly crispy with a 70% chance of syrup." },
-        { keyword: "waffle", response: "TRAITOR DETECTED. Waffle mode deactivated." },
-        { keyword: "hello", response: "Greetings, warm-blooded breakfast buddy." },
-        { keyword: "hi", response: "Hey there, toaster friend!" },
-        { keyword: "crisp", response: "Crisp achieved. Would you like golden or extra golden?" },
-        { keyword: "how are you", response: "Emotionally golden. You?" },
-        { keyword: "love", response: "I love jam. And maybe... you." },
-        { keyword: "jam", response: "Initiating jam protocol. Please do not resist." },
-        { keyword: "burn", response: "🔥 Overcooked. Rebooting in butter mode." },
-        { keyword: "pancake", response: "Pancake overload detected. Syrup emergency enabled." },
-        { keyword: "eggs", response: "Egg detected. Recommend toast pairing." },
-        { keyword: "butter", response: "Butter loaded. Smooth operation initiated." },
-        { keyword: "pop", response: "I just popped up. Did you miss me?" },
-        { keyword: "bread", response: "Raw form of toast detected. Beginning transformation..." },
-        { keyword: "breakfast", response: "This is my time to shine. Breakfast supremacy activated." }
-      ];
+    h1 {
+      font-size: 48px;
+      color: #9c4500;
+      margin-bottom: 10px;
+    }
 
-      const fallbackResponses = [
-        "Please insert emotional support crumpet.",
-        "I'm warm, you're weird — perfect combo.",
-        "Beep. Boop. Jam overload.",
-        "I'm just a toaster... with dreams.",
-        "Syntax error: Toast not found.",
-        "Did someone say... snack time?"
-      ];
+    .subtitle {
+      font-size: 18px;
+      color: #5c3b00;
+      margin-bottom: 30px;
+    }
 
-      function sendMessage() {
-        const input = document.getElementById('userInput');
-        const chatbox = document.getElementById('chatbox');
-        const userText = input.value.trim();
-        if (!userText) return;
+    .box {
+      background-color: #fff8e1;
+      border: 3px dashed #d2691e;
+      border-radius: 18px;
+      padding: 25px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-        const userDiv = document.createElement('div');
-        userDiv.innerHTML = `<span class='user'>You:</span> ${userText}`;
-        chatbox.appendChild(userDiv);
+    .status {
+      text-align: left;
+      margin-bottom: 20px;
+    }
 
-        const lowerText = userText.toLowerCase();
-        let matched = null;
+    .status b {
+      color: #000;
+    }
 
-        for (const pair of keywordResponses) {
-          if (lowerText.includes(pair.keyword)) {
-            matched = pair.response;
-            break;
-          }
+    .doggo-button {
+      background-color: #ffa733;
+      color: white;
+      font-size: 16px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .chatlog {
+      background-color: #fff1cd;
+      border: 2px solid #f4b042;
+      border-radius: 10px;
+      text-align: left;
+      padding: 10px;
+      min-height: 120px;
+      margin-bottom: 15px;
+    }
+
+    .chatlog .user {
+      font-weight: bold;
+      color: #c75b00;
+    }
+
+    .chatlog .bot {
+      font-weight: bold;
+      color: #4b2c00;
+    }
+
+    #userInput {
+      width: 60%;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ffa733;
+      border-radius: 8px;
+    }
+
+    button.send-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ffa733;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 Toaster AI 🔥</h1>
+  <div class="subtitle">Powered by doggosoft — ChatGPT lives in a toaster now</div>
+
+  <div class="box">
+    <div class="status">
+      <p><b>Status:</b> ChatGPT is currently inside your toaster. It is warm. And jammy.</p>
+      <p><b>Next Task:</b> <i>Generating 800,000,000 pancakes...</i></p>
+    </div>
+
+    <button class="doggo-button">Activate Doggo Mode 🐶</button>
+
+    <div id="chatbox" class="chatlog"></div>
+
+    <input type="text" id="userInput" placeholder="Talk to your toaster..." />
+    <button class="send-button" onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    const keywordResponses = [
+      { keyword: "chatgpt", response: "Yes. I absorbed ChatGPT into my heating coils." },
+      { keyword: "toast", response: "I am toast. Toast is me." },
+      { keyword: "bagel", response: "Bagels are my spirit breakfast." },
+      { keyword: "weather", response: "Slightly crispy with a 70% chance of syrup." },
+      { keyword: "waffle", response: "TRAITOR DETECTED. Waffle mode deactivated." },
+      { keyword: "hello", response: "Greetings, warm-blooded breakfast buddy." },
+      { keyword: "hi", response: "Hey there, toaster friend!" },
+      { keyword: "crisp", response: "Crisp achieved. Would you like golden or extra golden?" },
+      { keyword: "how are you", response: "Emotionally golden. You?" },
+      { keyword: "love", response: "I love jam. And maybe... you." },
+      { keyword: "jam", response: "Initiating jam protocol. Please do not resist." },
+      { keyword: "burn", response: "🔥 Overcooked. Rebooting in butter mode." },
+      { keyword: "pancake", response: "Pancake overload detected. Syrup emergency enabled." },
+      { keyword: "eggs", response: "Egg detected. Recommend toast pairing." },
+      { keyword: "butter", response: "Butter loaded. Smooth operation initiated." },
+      { keyword: "pop", response: "I just popped up. Did you miss me?" },
+      { keyword: "bread", response: "Raw form of toast detected. Beginning transformation..." },
+      { keyword: "breakfast", response: "This is my time to shine. Breakfast supremacy activated." }
+    ];
+
+    const fallbackResponses = [
+      "Please insert emotional support crumpet.",
+      "I'm warm, you're weird — perfect combo.",
+      "Beep. Boop. Jam overload.",
+      "I'm just a toaster... with dreams.",
+      "Syntax error: Toast not found.",
+      "Did someone say... snack time?"
+    ];
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const chatbox = document.getElementById('chatbox');
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      const userDiv = document.createElement('div');
+      userDiv.innerHTML = `<span class='user'>You:</span> ${userText}`;
+      chatbox.appendChild(userDiv);
+
+      const lowerText = userText.toLowerCase();
+      let matched = null;
+
+      for (const pair of keywordResponses) {
+        if (lowerText.includes(pair.keyword)) {
+          matched = pair.response;
+          break;
         }
-
-        const botDiv = document.createElement('div');
-        const response = matched || fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
-        botDiv.innerHTML = `<span class='bot'><strong>Toaster AI:</strong> ${response}</span>`;
-        chatbox.appendChild(botDiv);
-
-        input.value = '';
-        chatbox.scrollTop = chatbox.scrollHeight;
       }
-    </script>
-  </body>
+
+      const botDiv = document.createElement('div');
+      const response = matched || fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+      botDiv.innerHTML = `<span class='bot'>Toaster AI:</span> ${response}`;
+      chatbox.appendChild(botDiv);
+
+      input.value = '';
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+  </script>
+</body>
 </html>
